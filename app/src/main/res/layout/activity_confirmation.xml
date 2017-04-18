@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmationActivity">
+    <TextView
+        android:id="@+id/costumer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test1"/>
+    <TextView
+        android:id="@+id/costumer_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jalan Jalan Sore"/>
+    <TextView
+        android:id="@+id/totalProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="15 products"/>
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="80000 rupiah"/>
+
+
+</LinearLayout>
