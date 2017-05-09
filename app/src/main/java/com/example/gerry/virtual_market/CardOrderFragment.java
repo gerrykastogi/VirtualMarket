@@ -33,8 +33,8 @@ public class CardOrderFragment extends Fragment {
 
     private ArrayList<Order> listitems = new ArrayList<>();
     private RecyclerView MyRecycleView;
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.6:8000/showOrder/1";
-    String JSON_CUSTOMER_ID = "customer_id";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.11:8000/showOrder/1";
+    String JSON_NAME = "name";
     String JSON_TOTAL_PRODUCT = "total_products";
     String JSON_TOTAL_PRICES = "total_price";
 
@@ -156,7 +156,7 @@ public class CardOrderFragment extends Fragment {
             JSONObject json = null;
             try{
                 json = response.getJSONObject(i);
-                order.setCustomerName(json.getInt(JSON_CUSTOMER_ID));
+                order.setCustomerName(json.getString(JSON_NAME));
                 order.setTotalProducts(json.getInt(JSON_TOTAL_PRODUCT));
                 order.setTotalPrices(json.getInt(JSON_TOTAL_PRICES));
 

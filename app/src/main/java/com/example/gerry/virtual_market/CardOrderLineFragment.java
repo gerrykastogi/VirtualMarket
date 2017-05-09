@@ -38,7 +38,7 @@ public class CardOrderLineFragment extends Fragment {
     private ArrayList<OrderLine> listOrderLines = new ArrayList<>();
     private RecyclerView MyRecycleView;
 
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.6:8000/showOrderLine/2";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.11:8000/showOrderLine/2";
     String JSON_PRODUCT_NAME = "product_name";
     String JSON_PRODUCT_QUANTITY = "quantity";
     String JSON_PRODUCT_PRICE = "price";

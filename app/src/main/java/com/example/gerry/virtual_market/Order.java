@@ -5,15 +5,15 @@ package com.example.gerry.virtual_market;
  */
 
 public class Order {
-    Integer customerName;
+    String customerName;
     Integer totalProducts;
     Integer totalPrices;
 
     public String getCustomerName(){
-        return Integer.toString(customerName);
+        return customerName;
     }
 
-    public void setCustomerName(Integer customerName){
+    public void setCustomerName(String customerName){
         this.customerName = customerName;
     }
 
