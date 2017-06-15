@@ -25,18 +25,23 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by Gerry on 4/13/2017.
  */
 
 public class CardOrderFragment extends Fragment {
 
+
     private ArrayList<Order> listitems = new ArrayList<>();
     private RecyclerView MyRecycleView;
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.11:8000/showOrder/1";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.18:8000/api/virtualmarket/order/1";
     String JSON_NAME = "name";
-    String JSON_TOTAL_PRODUCT = "total_products";
-    String JSON_TOTAL_PRICES = "total_price";
+    String JSON_ORDER_ID = "id";
+    String JSON_TOTAL_PRODUCT = "total_product";
+    String JSON_TOTAL_PRICE = "total_price";
+    int ORDER_ID = 0;
 
     JsonArrayRequest jsonArrayRequest;
     RequestQueue requestQueue;
@@ -76,10 +81,22 @@ public class CardOrderFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, int position){
+        public void onBindViewHolder(final MyViewHolder holder, final int position){
             holder.titleTextView.setText(list.get(position).getCustomerName());
             holder.totalProductsTextView.setText(list.get(position).getTotalProducts());
             holder.totalPricesTextView.setText(list.get(position).getTotalPrices());
+
+            holder.shopButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ORDER_ID = list.get(position).getOrderId();
+                    Log.d("Order Id", Integer.toString(ORDER_ID));
+                    Intent intent = new Intent(view.getContext(), ListOrderLineActivity.class);
+                    intent.putExtra("order_id", ORDER_ID);
+                    Log.d("Order Id", Integer.toString(ORDER_ID));
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -104,13 +121,13 @@ public class CardOrderFragment extends Fragment {
             shopButton = (Button) v.findViewById(R.id.shopButton);
             finishButton = (Button) v.findViewById(R.id.finishButton);
 
-            shopButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), ListOrderLineActivity.class);
-                    view.getContext().startActivity(intent);
-                }
-            });
+//            shopButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(view.getContext(), ListOrderLineActivity.class);
+//                    view.getContext().startActivity(intent);
+//                }
+//            });
 
             finishButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,11 +171,14 @@ public class CardOrderFragment extends Fragment {
             Order order = new Order();
 
             JSONObject json = null;
+            JSONObject subJson = null;
             try{
                 json = response.getJSONObject(i);
-                order.setCustomerName(json.getString(JSON_NAME));
+                subJson = json.getJSONObject("user");
+                order.setCustomerName(subJson.getString(JSON_NAME));
+                order.setOrderId(json.getInt(JSON_ORDER_ID));
                 order.setTotalProducts(json.getInt(JSON_TOTAL_PRODUCT));
-                order.setTotalPrices(json.getInt(JSON_TOTAL_PRICES));
+                order.setTotalPrices(json.getInt(JSON_TOTAL_PRICE));
 
             }catch (JSONException e){
                 e.printStackTrace();

@@ -6,8 +6,9 @@ package com.example.gerry.virtual_market;
 
 public class Order {
     String customerName;
-    Integer totalProducts;
-    Integer totalPrices;
+    Integer orderId;
+    Integer totalProduct;
+    Integer totalPrice;
 
     public String getCustomerName(){
         return customerName;
@@ -17,20 +18,28 @@ public class Order {
         this.customerName = customerName;
     }
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId){
+        this.orderId = orderId;
+    }
+
     public String getTotalProducts(){
-        return Integer.toString(totalProducts);
+        return Integer.toString(totalProduct);
     }
 
     public void setTotalProducts(Integer totalProducts){
-        this.totalProducts = totalProducts;
+        this.totalProduct = totalProducts;
     }
 
     public String getTotalPrices(){
-        return Integer.toString(totalPrices);
+        return Integer.toString(totalPrice);
     }
 
     public void setTotalPrices(Integer totalPrices){
-        this.totalPrices = totalPrices;
+        this.totalPrice = totalPrices;
     }
 
 }
