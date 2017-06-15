@@ -24,8 +24,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 CardOrderFragment cardOrderFragment = new CardOrderFragment();
                 return cardOrderFragment;
             case 1:
-                ProductOrderFragment tab1 = new ProductOrderFragment();
-                return tab1;
+                ProductOrderFragment productOrderFragment = new ProductOrderFragment();
+                return productOrderFragment;
             default:
                 return null;
         }

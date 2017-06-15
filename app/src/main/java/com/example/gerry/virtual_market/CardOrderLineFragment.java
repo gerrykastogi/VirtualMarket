@@ -38,8 +38,8 @@ public class CardOrderLineFragment extends Fragment {
     private ArrayList<OrderLine> listOrderLines = new ArrayList<>();
     private RecyclerView MyRecycleView;
 
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.11:8000/showOrderLine/2";
-    String JSON_PRODUCT_NAME = "product_name";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.18:8000/api/virtualmarket/orderline/";
+    String JSON_PRODUCT_NAME = "product_id";
     String JSON_PRODUCT_QUANTITY = "quantity";
     String JSON_PRODUCT_PRICE = "price";
 
@@ -49,6 +49,8 @@ public class CardOrderLineFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        String orderId = getArguments().getString("order_id");
+        GET_JSON_DATA_HTTP_URL += orderId;
         initializeList();
         getActivity().setTitle("Order Line List");
     }
@@ -179,7 +181,7 @@ public class CardOrderLineFragment extends Fragment {
             JSONObject json = null;
             try{
                 json = response.getJSONObject(i);
-                orderLine.setProductName(json.getString(JSON_PRODUCT_NAME));
+                orderLine.setProductName(json.getInt(JSON_PRODUCT_NAME));
                 orderLine.setQuantity(json.getInt(JSON_PRODUCT_QUANTITY));
                 orderLine.setProductPrice(json.getInt(JSON_PRODUCT_PRICE));
                 orderLine.setImageResourceId(Images[i]);
