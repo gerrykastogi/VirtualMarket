@@ -93,8 +93,18 @@ public class CardOrderFragment extends Fragment {
                     Log.d("Order Id", Integer.toString(ORDER_ID));
                     Intent intent = new Intent(view.getContext(), ListOrderLineActivity.class);
                     intent.putExtra("order_id", ORDER_ID);
-                    Log.d("Order Id", Integer.toString(ORDER_ID));
                     view.getContext().startActivity(intent);
+                }
+            });
+
+            holder.finishButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ORDER_ID = list.get(position).getOrderId();
+                    Log.d("Order Id", Integer.toString(ORDER_ID));
+                    Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
+                    intent.putExtra("order_id", ORDER_ID);
+                    v.getContext().startActivity(intent);
                 }
             });
         }
@@ -129,13 +139,13 @@ public class CardOrderFragment extends Fragment {
 //                }
 //            });
 
-            finishButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(itemView.getContext(), ConfirmationActivity.class);
-                    v.getContext().startActivity(intent);
-                }
-            });
+//            finishButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(itemView.getContext(), ConfirmationActivity.class);
+//                    v.getContext().startActivity(intent);
+//                }
+//            });
         }
     }
 
