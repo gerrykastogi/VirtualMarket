@@ -33,32 +33,32 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp">
 
-            <EditText
+            <TextView
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/input_name"
                 android:layout_marginBottom="3dp"
-                android:textSize="16sp"
-                android:inputType="textPersonName|textCapWords"
-                android:hint="@string/hint_name"/>
+                android:textSize="16sp"/>
+                <!--android:inputType="textPersonName|textCapWords"-->
+                <!--android:hint="@string/hint_name"-->
 
-            <EditText
+            <TextView
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/input_address"
                 android:layout_marginBottom="3dp"
-                android:textSize="16sp"
-                android:inputType="textPostalAddress"
-                android:hint="@string/hint_address"/>
+                android:textSize="16sp"/>
+                <!--android:inputType="textPostalAddress"-->
+                <!--android:hint="@string/hint_address"-->
 
-            <EditText
+            <TextView
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/input_phone"
                 android:layout_marginBottom="3dp"
-                android:textSize="16sp"
-                android:hint="@string/hint_phone"
-                android:inputType="phone"/>
+                android:textSize="16sp"/>
+                <!--android:hint="@string/hint_phone"-->
+                <!--android:inputType="phone"-->
 
         </LinearLayout>
 
