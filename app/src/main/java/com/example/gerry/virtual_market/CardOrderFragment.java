@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -24,6 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
@@ -32,19 +37,21 @@ import static java.lang.Integer.parseInt;
  */
 
 public class CardOrderFragment extends Fragment {
-
-
     private ArrayList<Order> listitems = new ArrayList<>();
     private RecyclerView MyRecycleView;
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.18:8000/api/virtualmarket/order/1";
+    JsonArrayRequest jsonArrayRequest;
+    RequestQueue requestQueue;
+    Integer ORDER_ID = 0;
+
+    // URL
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.18:8000/api/virtualmarket/order/getData/2";
+    String POST_UPDATE_STATUS_DATA = "http://192.168.100.18:8000/api/virtualmarket/order/updateDeliveryStatus/";
+
+    // JSON data
     String JSON_NAME = "name";
     String JSON_ORDER_ID = "id";
     String JSON_TOTAL_PRODUCT = "total_product";
     String JSON_TOTAL_PRICE = "total_price";
-    int ORDER_ID = 0;
-
-    JsonArrayRequest jsonArrayRequest;
-    RequestQueue requestQueue;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
@@ -90,7 +97,6 @@ public class CardOrderFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ORDER_ID = list.get(position).getOrderId();
-                    Log.d("Order Id", Integer.toString(ORDER_ID));
                     Intent intent = new Intent(view.getContext(), ListOrderLineActivity.class);
                     intent.putExtra("order_id", ORDER_ID);
                     view.getContext().startActivity(intent);
@@ -101,7 +107,7 @@ public class CardOrderFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     ORDER_ID = list.get(position).getOrderId();
-                    Log.d("Order Id", Integer.toString(ORDER_ID));
+                    UPDATE_ORDER_STATUS();
                     Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
                     intent.putExtra("order_id", ORDER_ID);
                     v.getContext().startActivity(intent);
@@ -130,45 +136,27 @@ public class CardOrderFragment extends Fragment {
             totalPricesTextView = (TextView) v.findViewById(R.id.totalPricesTextView);
             shopButton = (Button) v.findViewById(R.id.shopButton);
             finishButton = (Button) v.findViewById(R.id.finishButton);
-
-//            shopButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(view.getContext(), ListOrderLineActivity.class);
-//                    view.getContext().startActivity(intent);
-//                }
-//            });
-
-//            finishButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(itemView.getContext(), ConfirmationActivity.class);
-//                    v.getContext().startActivity(intent);
-//                }
-//            });
         }
     }
 
     public void initializeList() {
         listitems.clear();
-        Log.d("Test1", "Masuk Initialize List");
+
         JSON_DATA_WEB_CALL();
     }
 
     private void JSON_DATA_WEB_CALL() {
-        Log.d("Test2", "Masuk Get JSON");
         jsonArrayRequest = new JsonArrayRequest(GET_JSON_DATA_HTTP_URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("Test3", "Masuk OnResponse");
                         JSON_PARSE_DATA_AFTER_WEBCALL(response);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        VolleyLog.d("get data error", "Error.." + error.getMessage());
                     }
                 });
         requestQueue = Volley.newRequestQueue(getContext());
@@ -176,7 +164,6 @@ public class CardOrderFragment extends Fragment {
     }
 
     private void JSON_PARSE_DATA_AFTER_WEBCALL(JSONArray response) {
-        Log.d("Test4", "Masuk Parser");
         for(int i=0; i<response.length(); i++){
             Order order = new Order();
 
@@ -195,10 +182,35 @@ public class CardOrderFragment extends Fragment {
             }
             listitems.add(order);
         }
-        Log.d("Test5", Integer.toString(listitems.size()));
+
         if (listitems.size()>0 & MyRecycleView!=null){
             MyRecycleView.setAdapter(new MyAdapter(listitems));
         }
+    }
+
+    private void UPDATE_ORDER_STATUS(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_UPDATE_STATUS_DATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("onResponse", "UPDATE_ORDER_STATUS");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("update error", "Error.." + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", Integer.toString(ORDER_ID));
+                params.put("status", "3");
+
+                return params;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
     }
 
 }

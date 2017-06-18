@@ -18,11 +18,11 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/divider"/>
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:background="@color/divider"/>-->
 
         <TextView
             android:id="@+id/totalProductsTextView"
@@ -30,11 +30,11 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/divider"/>
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:background="@color/divider"/>-->
 
         <TextView
             android:id="@+id/totalPricesTextView"

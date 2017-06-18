@@ -5,12 +5,21 @@ package com.example.gerry.virtual_market;
  */
 
 public class OrderLine {
+    Integer orderLineId;
     Integer productId;
     Integer quantity;
     Integer productPrice;
     Integer imageResourceId;
     Integer isfav;
     Integer isturned;
+
+    public String getOrderLineId(){
+        return Integer.toString(orderLineId);
+    }
+
+    public void setOrderLineId(Integer orderLineId){
+        this.orderLineId = orderLineId;
+    }
 
     public String getProductName(){
         return Integer.toString(productId);

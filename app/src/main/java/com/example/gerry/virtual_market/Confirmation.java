@@ -8,6 +8,7 @@ public class Confirmation {
     String customerName;
     String customerAddress;
     String customerPhone;
+    Integer totalPrice;
 
     public String getCustomerName(){
         return customerName;
@@ -31,5 +32,13 @@ public class Confirmation {
 
     public void setCustomerPhone(String customerPhone){
         this.customerPhone = customerPhone;
+    }
+
+    public String getTotalPrice(){
+        return Integer.toString(totalPrice);
+    }
+
+    public void setTotalPrice(Integer totalPrice){
+        this.totalPrice = totalPrice;
     }
 }
