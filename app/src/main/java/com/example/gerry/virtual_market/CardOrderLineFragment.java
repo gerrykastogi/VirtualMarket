@@ -1,14 +1,11 @@
 package com.example.gerry.virtual_market;
 
-import android.app.DownloadManager;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -32,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +37,7 @@ import java.util.Map;
  */
 
 public class CardOrderLineFragment extends Fragment {
-
+    private Toolbar toolbar;
     private int Images[] = {R.drawable.tomat, R.drawable.bawang_putih, R.drawable.ayam,
             R.drawable.wortel, R.drawable.ayam, R.drawable.daging, R.drawable.wortel, R.drawable.wortel, R.drawable.ayam};
     private ArrayList<OrderLine> listOrderLines = new ArrayList<>();
@@ -54,13 +49,13 @@ public class CardOrderLineFragment extends Fragment {
     String ORDER_ID = "";
 
     // URL
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.18:8000/api/virtualmarket/orderline/";
-    String POST_PRICE_DATA = "http://192.168.100.18:8000/api/virtualmarket/orderline/updatePrice";
-    String POST_UPDATE_STATUS_DATA = "http://192.168.100.18:8000/api/virtualmarket/orderline/updateStatus";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.15:8001/api/virtualmarket/orderline/";
+    String POST_PRICE_DATA = "http://192.168.100.15:8001/api/virtualmarket/orderline/updatePrice";
+    String POST_UPDATE_STATUS_DATA = "http://192.168..220:8001/api/virtualmarket/orderline/updateStatus";
 
     // JSON Data
     String JSON_ORDER_LINE_ID = "id";
-    String JSON_PRODUCT_NAME = "product_id";
+    String JSON_PRODUCT_NAME = "name";
     String JSON_PRODUCT_QUANTITY = "quantity";
     String JSON_PRODUCT_PRICE = "price";
 
@@ -186,12 +181,14 @@ public class CardOrderLineFragment extends Fragment {
     private void JSON_PARSE_DATA_AFTER_WEBCALL(JSONArray response) {
         for(int i=0; i<response.length(); i++){
             OrderLine orderLine = new OrderLine();
-
+            Log.d("Masuk sini", "Masuk ko");
             JSONObject json = null;
+            JSONObject subJson = null;
             try{
                 json = response.getJSONObject(i);
+                subJson = json.getJSONObject("product");
                 orderLine.setOrderLineId(json.getInt(JSON_ORDER_LINE_ID));
-                orderLine.setProductName(json.getInt(JSON_PRODUCT_NAME));
+                orderLine.setProductName(subJson.getString(JSON_PRODUCT_NAME));
                 orderLine.setQuantity(json.getInt(JSON_PRODUCT_QUANTITY));
                 orderLine.setProductPrice(json.getInt(JSON_PRODUCT_PRICE));
                 orderLine.setImageResourceId(Images[i]);

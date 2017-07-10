@@ -6,12 +6,10 @@ package com.example.gerry.virtual_market;
 
 public class OrderLine {
     Integer orderLineId;
-    Integer productId;
+    String productName;
     Integer quantity;
     Integer productPrice;
     Integer imageResourceId;
-    Integer isfav;
-    Integer isturned;
 
     public String getOrderLineId(){
         return Integer.toString(orderLineId);
@@ -22,11 +20,11 @@ public class OrderLine {
     }
 
     public String getProductName(){
-        return Integer.toString(productId);
+        return productName;
     }
 
-    public void setProductName(Integer productId){
-        this.productId = productId;
+    public void setProductName(String productName){
+        this.productName = productName;
     }
 
     public String getQuantity(){
@@ -51,21 +49,5 @@ public class OrderLine {
 
     public void setImageResourceId(Integer imageResourceId){
         this.imageResourceId = imageResourceId;
-    }
-
-    public Integer getIsturned(){
-        return isturned;
-    }
-
-    public void setIsturned(Integer isturned){
-        this.isturned = isturned;
-    }
-
-    public Integer getIsfav(){
-        return isfav;
-    }
-
-    public void setIsfav(Integer isfav){
-        this.isfav = isfav;
     }
 }

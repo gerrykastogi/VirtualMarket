@@ -3,6 +3,7 @@ package com.example.gerry.virtual_market;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -30,7 +30,6 @@ import java.util.Map;
  */
 
 public class ConfirmationActivity extends AppCompatActivity {
-
     private ArrayList<Confirmation> listitems = new ArrayList<>();
     public TextView nameTextView;
     public TextView addressTextView;
@@ -38,8 +37,8 @@ public class ConfirmationActivity extends AppCompatActivity {
     public TextView totalPriceTextView;
     public Button backButton;
     public Button confirmationButton;
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.18:8000/api/virtualmarket/confirmation/";
-    String urlUpdateStatus = "http://192.168.100.18:8000/api/virtualmarket/order/updateConfirmationStatus";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.15:8001/api/virtualmarket/confirmation/";
+    String urlUpdateStatus = "http://192.168.100.15:8001/api/virtualmarket/order/updateConfirmationStatus";
     String JSON_CUSTOMER_NAME = "name";
     String JSON_CUSTOMER_PHONE = "phone_number";
     String JSON_CUSTOMER_ADDRESS = "address";
@@ -48,11 +47,23 @@ public class ConfirmationActivity extends AppCompatActivity {
 
     JsonArrayRequest jsonArrayRequest;
     RequestQueue requestQueue;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        getSupportActionBar().setTitle("Order Masuk");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Intent intent = getIntent();
         orderId = intent.getIntExtra("order_id", 0);
@@ -77,11 +88,18 @@ public class ConfirmationActivity extends AppCompatActivity {
                 v.getContext().startActivity(intent);
             }
         });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void getConfirmationData() {
         listitems.clear();
-
+        Log.d("masuk getdata", "getConfirmationData: ");
         JSON_DATA_WEB_CALL();
     }
 
@@ -97,7 +115,7 @@ public class ConfirmationActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Log.d("Test2", "Masuk error confirmation activity");
+                        Log.d("Test2", "Masuk error confirmation activity");
                     }
                 });
         requestQueue = Volley.newRequestQueue(this);

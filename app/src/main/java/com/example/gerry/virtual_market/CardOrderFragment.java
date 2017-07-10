@@ -44,8 +44,8 @@ public class CardOrderFragment extends Fragment {
     Integer ORDER_ID = 0;
 
     // URL
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.18:8000/api/virtualmarket/order/getData/2";
-    String POST_UPDATE_STATUS_DATA = "http://192.168.100.18:8000/api/virtualmarket/order/updateDeliveryStatus/";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.15:8001/api/virtualmarket/order/getData/1";
+    String POST_UPDATE_STATUS_DATA = "http://192.168.100.15:8001/api/virtualmarket/order/updateDeliveryStatus/";
 
     // JSON data
     String JSON_NAME = "name";
@@ -109,6 +109,7 @@ public class CardOrderFragment extends Fragment {
                     ORDER_ID = list.get(position).getOrderId();
                     UPDATE_ORDER_STATUS();
                     Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
+                    Log.d("order id nya segini : ", Integer.toString(ORDER_ID));
                     intent.putExtra("order_id", ORDER_ID);
                     v.getContext().startActivity(intent);
                 }
@@ -204,7 +205,6 @@ public class CardOrderFragment extends Fragment {
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id", Integer.toString(ORDER_ID));
-                params.put("status", "3");
 
                 return params;
             }

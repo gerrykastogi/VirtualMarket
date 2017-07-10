@@ -10,7 +10,8 @@
     android:paddingEnd="@dimen/activity_right_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context=".ListOrderActivity">
+    tools:context=".ListOrderActivity"
+    android:background="@color/colorPrimaryLight">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/orderRecycle"

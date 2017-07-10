@@ -4,7 +4,12 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/colorPrimaryLight">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
     <ImageView
         android:id="@+id/profile_image"
@@ -12,7 +17,7 @@
         android:layout_height="300dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/profile"/>
+        android:src="@drawable/profile_pic"/>
 
     <Button
         android:id="@+id/request_json"
