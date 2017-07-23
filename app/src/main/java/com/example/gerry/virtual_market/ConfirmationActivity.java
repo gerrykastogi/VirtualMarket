@@ -35,14 +35,17 @@ public class ConfirmationActivity extends AppCompatActivity {
     public TextView addressTextView;
     public TextView phoneTextView;
     public TextView totalPriceTextView;
+    public TextView ratesTextView;
+    public TextView totalsemuanyaTextView;
     public Button backButton;
     public Button confirmationButton;
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.15:8001/api/virtualmarket/confirmation/";
-    String urlUpdateStatus = "http://192.168.100.15:8001/api/virtualmarket/order/updateConfirmationStatus";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.43.211:8001/api/virtualmarket/confirmation/";
+    String urlUpdateStatus = "http://192.168.43.211:8001/api/virtualmarket/order/updateConfirmationStatus";
     String JSON_CUSTOMER_NAME = "name";
     String JSON_CUSTOMER_PHONE = "phone_number";
     String JSON_CUSTOMER_ADDRESS = "address";
     String JSON_TOTAL_PRICE = "total_price";
+    String JSON_RATES = "rates";
     Integer orderId = 0;
 
     JsonArrayRequest jsonArrayRequest;
@@ -76,9 +79,13 @@ public class ConfirmationActivity extends AppCompatActivity {
         nameTextView = (TextView) findViewById(R.id.name);
         addressTextView = (TextView) findViewById(R.id.address);
         phoneTextView = (TextView) findViewById(R.id.phone);
-        totalPriceTextView = (TextView) findViewById(R.id.total);
+        totalPriceTextView = (TextView) findViewById(R.id.total_belanja);
+        ratesTextView = (TextView) findViewById(R.id.rates);
+        totalsemuanyaTextView = (TextView) findViewById(R.id.total);
         backButton = (Button) findViewById(R.id.back_button);
         confirmationButton = (Button) findViewById(R.id.confirm_button);
+
+
 
         confirmationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +143,7 @@ public class ConfirmationActivity extends AppCompatActivity {
                 confirmation.setCustomerAddress(subJsonUser.getString(JSON_CUSTOMER_ADDRESS));
                 confirmation.setCustomerPhone(subJsonUser.getString(JSON_CUSTOMER_PHONE));
                 confirmation.setTotalPrice(json.getInt(JSON_TOTAL_PRICE));
+                confirmation.setRates(json.getInt(JSON_RATES));
                 Log.d("Test4", confirmation.getCustomerName());
                 Log.d("Test5", confirmation.getCustomerAddress());
                 Log.d("Test6", confirmation.getCustomerPhone());
@@ -149,6 +157,8 @@ public class ConfirmationActivity extends AppCompatActivity {
             addressTextView.setText(listitems.get(0).getCustomerAddress());
             phoneTextView.setText(listitems.get(0).getCustomerPhone());
             totalPriceTextView.setText(listitems.get(0).getTotalPrice());
+            ratesTextView.setText(listitems.get(0).getRates());
+            totalsemuanyaTextView.setText(Integer.toString(Integer.parseInt(listitems.get(0).getTotalPrice())+Integer.parseInt(listitems.get(0).getRates())));
         }
     }
 

@@ -44,8 +44,9 @@ public class CardOrderFragment extends Fragment {
     Integer ORDER_ID = 0;
 
     // URL
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.15:8001/api/virtualmarket/order/getData/1";
-    String POST_UPDATE_STATUS_DATA = "http://192.168.100.15:8001/api/virtualmarket/order/updateDeliveryStatus/";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.43.211:8001/api/virtualmarket/order/getData/";
+    String POST_UPDATE_STATUS_DATA = "http://192.168.43.211:8001/api/virtualmarket/order/updateDeliveryStatus/";
+    String UPDATE_RATES_DATA = "http://192.168.43.211:8001/api/virtualmarket/rates";
 
     // JSON data
     String JSON_NAME = "name";
@@ -56,6 +57,8 @@ public class CardOrderFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        GET_JSON_DATA_HTTP_URL += PreferencesController.getID(getContext());
+        Log.d("Link data", GET_JSON_DATA_HTTP_URL);
         initializeList();
         getActivity().setTitle("Order List");
     }
@@ -108,6 +111,7 @@ public class CardOrderFragment extends Fragment {
                 public void onClick(View v) {
                     ORDER_ID = list.get(position).getOrderId();
                     UPDATE_ORDER_STATUS();
+                    UPDATE_RATES();
                     Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
                     Log.d("order id nya segini : ", Integer.toString(ORDER_ID));
                     intent.putExtra("order_id", ORDER_ID);
@@ -213,4 +217,19 @@ public class CardOrderFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+    private void UPDATE_RATES(){
+        StringRequest stringRequest = new StringRequest(UPDATE_RATES_DATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("onResponse", "UPDATE_ORDER_STATUS");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("update error", "Error.." + error.getMessage());
+            }
+        });
+        requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+    }
 }

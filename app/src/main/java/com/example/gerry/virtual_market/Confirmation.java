@@ -9,6 +9,7 @@ public class Confirmation {
     String customerAddress;
     String customerPhone;
     Integer totalPrice;
+    Integer rates;
 
     public String getCustomerName(){
         return customerName;
@@ -40,5 +41,13 @@ public class Confirmation {
 
     public void setTotalPrice(Integer totalPrice){
         this.totalPrice = totalPrice;
+    }
+
+    public String getRates(){
+        return Integer.toString(rates);
+    }
+
+    public void setRates(Integer rates){
+        this.rates = rates;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.gerry.virtual_market;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,11 +25,14 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.androidquery.AQuery;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +43,6 @@ import java.util.Map;
 
 public class CardOrderLineFragment extends Fragment {
     private Toolbar toolbar;
-    private int Images[] = {R.drawable.tomat, R.drawable.bawang_putih, R.drawable.ayam,
-            R.drawable.wortel, R.drawable.ayam, R.drawable.daging, R.drawable.wortel, R.drawable.wortel, R.drawable.ayam};
     private ArrayList<OrderLine> listOrderLines = new ArrayList<>();
     private RecyclerView MyRecycleView;
     JsonArrayRequest jsonArrayRequest;
@@ -49,15 +52,17 @@ public class CardOrderLineFragment extends Fragment {
     String ORDER_ID = "";
 
     // URL
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.100.15:8001/api/virtualmarket/orderline/";
-    String POST_PRICE_DATA = "http://192.168.100.15:8001/api/virtualmarket/orderline/updatePrice";
-    String POST_UPDATE_STATUS_DATA = "http://192.168..220:8001/api/virtualmarket/orderline/updateStatus";
+    String GET_JSON_DATA_HTTP_URL = "http://192.168.43.211:8001/api/virtualmarket/orderline/";
+    String POST_PRICE_DATA = "http://192.168.43.211:8001/api/virtualmarket/orderline/updatePrice";
+    String POST_UPDATE_STATUS_DATA = "http://192.168.43.211.:8001/api/virtualmarket/orderline/updateStatus";
+    String GET_IMAGE_URL = "http://192.168.43.211:8001/api/virtualmarket/images/products/";
 
     // JSON Data
     String JSON_ORDER_LINE_ID = "id";
     String JSON_PRODUCT_NAME = "name";
     String JSON_PRODUCT_QUANTITY = "quantity";
     String JSON_PRODUCT_PRICE = "price";
+    String JSON_PRODUCT_IMAGE = "product_img";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
@@ -101,8 +106,8 @@ public class CardOrderLineFragment extends Fragment {
             holder.titleTextView.setText(list.get(position).getProductName());
             holder.quantityTextView.setText(list.get(position).getQuantity());
             holder.productPriceEditText.setText(list.get(position).getProductPrice());
-            holder.coverImageView.setImageResource(list.get(position).getImageResourceId());
-            holder.coverImageView.setTag(list.get(position).getImageResourceId());
+            AQuery aq=new AQuery(getContext());
+            aq.id(holder.coverImageView).image(list.get(position).getImageUrl());
             holder.likeImageView.setTag(R.drawable.ic_yes);
 
             holder.likeImageView.setOnClickListener(new View.OnClickListener(){
@@ -191,8 +196,8 @@ public class CardOrderLineFragment extends Fragment {
                 orderLine.setProductName(subJson.getString(JSON_PRODUCT_NAME));
                 orderLine.setQuantity(json.getInt(JSON_PRODUCT_QUANTITY));
                 orderLine.setProductPrice(json.getInt(JSON_PRODUCT_PRICE));
-                orderLine.setImageResourceId(Images[i]);
-
+                orderLine.setImageUrl(GET_IMAGE_URL + subJson.getString(JSON_PRODUCT_IMAGE));
+                Log.d("IMAGE nih bro", orderLine.getImageUrl());
             }catch (JSONException e){
                 e.printStackTrace();
             }

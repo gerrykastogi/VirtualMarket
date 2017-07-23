@@ -9,7 +9,7 @@ public class OrderLine {
     String productName;
     Integer quantity;
     Integer productPrice;
-    Integer imageResourceId;
+    String imageUrl;
 
     public String getOrderLineId(){
         return Integer.toString(orderLineId);
@@ -43,11 +43,11 @@ public class OrderLine {
         this.productPrice = productPrice;
     }
 
-    public Integer getImageResourceId(){
-        return imageResourceId;
+    public String getImageUrl(){
+        return imageUrl;
     }
 
-    public void setImageResourceId(Integer imageResourceId){
-        this.imageResourceId = imageResourceId;
+    public void setImageUrl(String imageUrl){
+        this.imageUrl = imageUrl;
     }
 }
