@@ -1,7 +1,5 @@
 package com.example.gerry.virtual_market;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,8 +29,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,10 +48,10 @@ public class CardOrderLineFragment extends Fragment {
     String ORDER_ID = "";
 
     // URL
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.43.211:8001/api/virtualmarket/orderline/";
-    String POST_PRICE_DATA = "http://192.168.43.211:8001/api/virtualmarket/orderline/updatePrice";
-    String POST_UPDATE_STATUS_DATA = "http://192.168.43.211.:8001/api/virtualmarket/orderline/updateStatus";
-    String GET_IMAGE_URL = "http://192.168.43.211:8001/api/virtualmarket/images/products/";
+    String GET_JSON_DATA_HTTP_URL = Variable.getUrl() + "/api/virtualmarket/orderline/";
+    String POST_PRICE_DATA = Variable.getUrl() + "/api/virtualmarket/orderline/updatePrice";
+    String POST_UPDATE_STATUS_DATA = Variable.getUrl() + "/api/virtualmarket/orderline/updateStatus";
+    String GET_IMAGE_URL = Variable.getUrl() + "/api/virtualmarket/images/products/";
 
     // JSON Data
     String JSON_ORDER_LINE_ID = "id";
@@ -63,6 +59,7 @@ public class CardOrderLineFragment extends Fragment {
     String JSON_PRODUCT_QUANTITY = "quantity";
     String JSON_PRODUCT_PRICE = "price";
     String JSON_PRODUCT_IMAGE = "product_img";
+    String JSON_PRODUCT_UNIT = "unit";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
@@ -105,7 +102,13 @@ public class CardOrderLineFragment extends Fragment {
         public void onBindViewHolder(final MyViewHolder holder, final int position){
             holder.titleTextView.setText(list.get(position).getProductName());
             holder.quantityTextView.setText(list.get(position).getQuantity());
-            holder.productPriceEditText.setText(list.get(position).getProductPrice());
+            holder.unitTextView.setText(list.get(position).getUnit());
+//            if (list.get(position).getProductPrice() != "0"){
+//                holder.productPriceEditText.setText(list.get(position).getProductPrice());
+//                holder.productPriceEditText.setKeyListener(null);
+//            } else {
+                holder.productPriceEditText.setText(list.get(position).getProductPrice());
+//            }
             AQuery aq=new AQuery(getContext());
             aq.id(holder.coverImageView).image(list.get(position).getImageUrl());
             holder.likeImageView.setTag(R.drawable.ic_yes);
@@ -143,6 +146,7 @@ public class CardOrderLineFragment extends Fragment {
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView titleTextView;
         public TextView quantityTextView;
+        public TextView unitTextView;
         public EditText productPriceEditText;
         public ImageView coverImageView;
         public ImageView likeImageView;
@@ -152,6 +156,7 @@ public class CardOrderLineFragment extends Fragment {
             super(v);
             titleTextView = (TextView) v.findViewById(R.id.titleTextView);
             quantityTextView = (TextView) v.findViewById(R.id.quantityTextView);
+            unitTextView = (TextView) v.findViewById(R.id.unitTextView);
             productPriceEditText = (EditText) v.findViewById(R.id.productPriceTextView);
             coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
             likeImageView = (ImageView) v.findViewById(R.id.likeImageView);
@@ -189,15 +194,17 @@ public class CardOrderLineFragment extends Fragment {
             Log.d("Masuk sini", "Masuk ko");
             JSONObject json = null;
             JSONObject subJson = null;
+            JSONObject unitJson = null;
             try{
                 json = response.getJSONObject(i);
                 subJson = json.getJSONObject("product");
+                unitJson = json.getJSONObject("unit");
                 orderLine.setOrderLineId(json.getInt(JSON_ORDER_LINE_ID));
                 orderLine.setProductName(subJson.getString(JSON_PRODUCT_NAME));
                 orderLine.setQuantity(json.getInt(JSON_PRODUCT_QUANTITY));
+                orderLine.setUnit(unitJson.getString(JSON_PRODUCT_UNIT));
                 orderLine.setProductPrice(json.getInt(JSON_PRODUCT_PRICE));
                 orderLine.setImageUrl(GET_IMAGE_URL + subJson.getString(JSON_PRODUCT_IMAGE));
-                Log.d("IMAGE nih bro", orderLine.getImageUrl());
             }catch (JSONException e){
                 e.printStackTrace();
             }

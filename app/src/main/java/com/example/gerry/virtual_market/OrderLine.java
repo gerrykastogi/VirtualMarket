@@ -9,6 +9,7 @@ public class OrderLine {
     String productName;
     Integer quantity;
     Integer productPrice;
+    String unit;
     String imageUrl;
 
     public String getOrderLineId(){
@@ -41,6 +42,14 @@ public class OrderLine {
 
     public void setProductPrice(Integer productPrice){
         this.productPrice = productPrice;
+    }
+
+    public String getUnit(){
+        return unit;
+    }
+
+    public void setUnit(String unit){
+        this.unit = unit;
     }
 
     public String getImageUrl(){

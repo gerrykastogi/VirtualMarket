@@ -44,9 +44,9 @@ public class CardOrderFragment extends Fragment {
     Integer ORDER_ID = 0;
 
     // URL
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.43.211:8001/api/virtualmarket/order/getData/";
-    String POST_UPDATE_STATUS_DATA = "http://192.168.43.211:8001/api/virtualmarket/order/updateDeliveryStatus/";
-    String UPDATE_RATES_DATA = "http://192.168.43.211:8001/api/virtualmarket/rates";
+    String GET_JSON_DATA_HTTP_URL = Variable.getUrl() + "/api/virtualmarket/order/getData/";
+    String POST_UPDATE_STATUS_DATA = Variable.getUrl() + "/api/virtualmarket/order/updateDeliveryStatus/";
+    String UPDATE_RATES_DATA = Variable.getUrl() + "/api/virtualmarket/rates";
 
     // JSON data
     String JSON_NAME = "name";

@@ -63,33 +63,33 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/primaryText"
-            android:text="Pesanan"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:textSize="18sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/primaryText"-->
+            <!--android:text="Pesanan"/>-->
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:scrollbars="none" >
+        <!--<HorizontalScrollView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:scrollbars="none" >-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/fixed_order_list"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal" >
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/fixed_order_list"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:orientation="horizontal" >-->
+            <!--</LinearLayout>-->
 
-        </HorizontalScrollView>
+        <!--</HorizontalScrollView>-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,9 +118,20 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Total Belanja"
+                        android:layout_weight="0.59" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -128,7 +139,8 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:text="Total Belanja"/>
+                        android:text="Rp"
+                        android:layout_weight="0.07" />
 
                     <TextView
                         android:id="@+id/total_belanja"
@@ -139,7 +151,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -147,17 +159,28 @@
                     android:layout_marginBottom="10dp"
                     android:background="@color/divider"/>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp">
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/primaryText"
+                        android:text="Biaya Pengiriman"
+                        android:layout_weight="0.59" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
                         android:textColor="@color/primaryText"
-                        android:text="Biaya Pengiriman"/>
+                        android:text="Rp"
+                        android:layout_weight="0.07" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -166,7 +189,7 @@
                         android:layout_alignParentRight="true"
                         android:textSize="18sp"
                         android:textColor="@color/primaryText" />
-                </RelativeLayout>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -174,9 +197,20 @@
                     android:layout_marginBottom="10dp"
                     android:background="@color/divider"/>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Total"
+                        android:layout_weight="0.59" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -184,7 +218,8 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:text="Total"/>
+                        android:text="Rp"
+                        android:layout_weight="0.07" />
 
                     <TextView
                         android:id="@+id/total"
@@ -195,7 +230,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
 

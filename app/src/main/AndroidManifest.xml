@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gerry.virtual_market">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAT65_OGp-KOIb8aTd9uc3Whh3IbYrVEAY"/>
+            android:value="AIzaSyAT65_OGp-KOIb8aTd9uc3Whh3IbYrVEAY" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,12 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".ListOrderActivity"></activity>
-        <activity android:name=".ListOrderLineActivity"></activity>
-        <activity android:name=".ConfirmationActivity"></activity>
-
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ListOrderActivity" />
+        <activity android:name=".ListOrderLineActivity" />
+        <activity android:name=".ConfirmationActivity" />
+        <activity android:name=".ConfirmationStatusActivity"></activity>
     </application>
 
 </manifest>

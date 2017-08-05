@@ -16,19 +16,60 @@
             android:id="@+id/titleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size"/>
 
-        <TextView
-            android:id="@+id/totalProductsTextView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/totalPricesTextView"
+            <TextView
+                android:id="@+id/totalProductsText"
+                android:layout_width="189dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="Total Barang"/>
+
+            <TextView
+                android:id="@+id/totalProductsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/totalPriceText"
+                android:layout_width="189dp"
+                android:layout_height="wrap_content"
+                android:text="Total Harga"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/Rupiah"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="Rp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/totalPricesTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

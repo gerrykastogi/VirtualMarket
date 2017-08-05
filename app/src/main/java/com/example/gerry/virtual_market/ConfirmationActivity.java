@@ -39,8 +39,8 @@ public class ConfirmationActivity extends AppCompatActivity {
     public TextView totalsemuanyaTextView;
     public Button backButton;
     public Button confirmationButton;
-    String GET_JSON_DATA_HTTP_URL = "http://192.168.43.211:8001/api/virtualmarket/confirmation/";
-    String urlUpdateStatus = "http://192.168.43.211:8001/api/virtualmarket/order/updateConfirmationStatus";
+    String GET_JSON_DATA_HTTP_URL = Variable.getUrl() + "/api/virtualmarket/confirmation/";
+    String urlUpdateStatus = Variable.getUrl() + "/api/virtualmarket/order/updateConfirmationStatus";
     String JSON_CUSTOMER_NAME = "name";
     String JSON_CUSTOMER_PHONE = "phone_number";
     String JSON_CUSTOMER_ADDRESS = "address";
@@ -144,10 +144,6 @@ public class ConfirmationActivity extends AppCompatActivity {
                 confirmation.setCustomerPhone(subJsonUser.getString(JSON_CUSTOMER_PHONE));
                 confirmation.setTotalPrice(json.getInt(JSON_TOTAL_PRICE));
                 confirmation.setRates(json.getInt(JSON_RATES));
-                Log.d("Test4", confirmation.getCustomerName());
-                Log.d("Test5", confirmation.getCustomerAddress());
-                Log.d("Test6", confirmation.getCustomerPhone());
-
             }catch (JSONException e){
                 e.printStackTrace();
             }
